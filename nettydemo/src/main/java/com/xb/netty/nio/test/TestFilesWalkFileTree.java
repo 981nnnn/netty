@@ -18,7 +18,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  **/
 public class TestFilesWalkFileTree {
   public static void main(String[] args) throws IOException {
-    walkJarTree();
+  //  walkJarTree();
+    deleteFile();
   }
 
   private static void walkFileTree() throws IOException {
@@ -44,6 +45,10 @@ public class TestFilesWalkFileTree {
     System.out.println("file count"+fileCount);
   }
 
+  /**
+   * 找寻文件夹所有的jar
+   * @throws IOException
+   */
   private static void walkJarTree() throws IOException {
     AtomicInteger jarCount = new AtomicInteger();
     Files.walkFileTree(Paths.get("E:\\software\\jdk\\jdk1.8.0_152"),new SimpleFileVisitor<Path>(){
@@ -57,6 +62,30 @@ public class TestFilesWalkFileTree {
       }
     });
     System.out.println(jarCount);
+  }
+
+  private static void deleteFile() throws IOException {
+    Files.walkFileTree(Paths.get("C:\\Users\\xb\\Desktop\\test"),new SimpleFileVisitor<Path>(){
+      @Override
+      public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+        System.out.println("===>进入"+dir);
+        return super.preVisitDirectory(dir, attrs);
+      }
+
+      @Override
+      public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+        System.out.println(file);
+        Files.delete(file);
+        return super.visitFile(file, attrs);
+      }
+
+      @Override
+      public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+        System.out.println("<===退出"+dir);
+        Files.delete(dir);
+        return super.postVisitDirectory(dir, exc);
+      }
+    });
   }
 
 }
