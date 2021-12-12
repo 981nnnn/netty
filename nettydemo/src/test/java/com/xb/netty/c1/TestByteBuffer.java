@@ -19,7 +19,7 @@ import java.nio.channels.FileChannel;
 public class TestByteBuffer {
   public static void main(String[] args) {
     try {
-      FileChannel channel = new FileInputStream("d:\\file01.txt").getChannel();
+      FileChannel channel = new FileInputStream("nettydemo/src/main/resources/data.json").getChannel();
 
       ByteBuffer buffer = ByteBuffer.allocate(10);
 

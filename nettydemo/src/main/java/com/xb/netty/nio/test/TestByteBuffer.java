@@ -1,8 +1,5 @@
 package com.xb.netty.nio.test;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
-import lombok.experimental.var;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -22,7 +19,7 @@ public class TestByteBuffer {
     // 1.输入输出流 2.RannomAccesFile
     try{
       System.out.println("12312321");
-      FileChannel fileChannel= new FileInputStream("data.txt").getChannel();
+      FileChannel fileChannel= new FileInputStream("resource/data.json").getChannel();
         // 准备一个缓冲区
       ByteBuffer  byteBuffer = ByteBuffer.allocate(10);
       fileChannel.read(byteBuffer);
